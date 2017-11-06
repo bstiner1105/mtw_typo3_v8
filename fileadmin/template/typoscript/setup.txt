@@ -1,0 +1,470 @@
+# Columns / Spalten Content Info
+#---------------------------------
+#Links  1
+#Normal 0
+#Rechts 2
+#Rand   3
+
+# Rendering Content - Columns
+#---------------------------------
+lib.content < styles.content.get
+lib.content.select.where = colPos = 0
+lib.sliderTop < styles.content.get
+lib.sliderTop.select.where = colPos = 1
+lib.additionalContent < styles.content.get
+lib.additionalContent.select.where = colPos = 2
+
+
+## Rendering - Templates fluid_styled_contents
+## i.e. changed template for partial Media Gallery -> picturefill
+#----------------------------------
+#lib.fluidContent.templateRootPaths.30 = fileadmin/template/extensions/fluid_styled_content/Templates/
+#lib.fluidContent.partialRootPaths.30 = fileadmin/template/extensions/fluid_styled_content/Partials/
+#lib.fluidContent.layoutRootPaths.30 = fileadmin/template/extensions/fluid_styled_content/Layouts/
+
+
+# Page
+#---------------------------------
+
+page = PAGE
+page {
+
+
+	10 = FLUIDTEMPLATE
+	10 {
+
+		file.stdWrap.cObject = CASE
+		file.stdWrap.cObject {
+			# slide the template
+			key.data = levelfield:-1, backend_layout_next_level, slide
+			key.override.field = backend_layout
+
+			# template file for backend-layout with ID x
+			1 = TEXT
+			1.value = fileadmin/template/html/Template/Default.html
+		}
+
+		partialRootPath = fileadmin/template/html/Partial/
+		layoutRootPath = fileadmin/template/html/Layout/
+
+		variables {
+
+		}
+	}
+
+
+
+	meta {
+		X-UA-Compatible = IE=edge,chrome=1
+		X-UA-Compatible.attribute = http-equiv
+		viewport = width=device-width, initial-scale=1
+		format-detection = telephone=no
+		#keywords.field = keywords
+		#description.field = description
+		language = de
+		robots = index,follow,noodp
+		googlebot = index,follow,noodp
+		copyright = Copyright text
+		author = Author
+		publisher = Publisher
+		page-topic = page-topic
+		audience = all
+		apple-mobile-web-app-capable = yes
+		apple-mobile-web-app-status-bar-style = black
+		apple-mobile-web-app-title = {$og.titlesuffix}
+		mobile-web-app-capable = yes
+
+	}
+
+
+	includeCSS {
+		file1 = fileadmin/template/assets/css/style.css
+		file1.media = all
+	}
+
+	includeJSFooter {
+		modernizr = fileadmin/template/assets/js/libs/modernizr.custom.63405.js
+		#modernizr.async = 1
+		jquery = fileadmin/template/assets/js/libs/jquery/jquery-3.2.1.min.js
+		script = fileadmin/template/assets/js/script.js
+		#script.async = 1
+		# only use async=1 when files are not merged
+	}
+
+	typeNum = 0
+
+} #page End
+
+
+
+## config
+#---------------------------------
+
+config {
+	doctype = html5
+	baseURL >
+	baseURL =
+	absRefPrefix = /
+	renderCharset= utf-8
+	metaCharset = utf-8
+	xhtml_cleaning = all
+	xmlprologue = none
+	tx_realurl_enable = 1
+	disablePrefixComment = 1
+	disableImgBorderAttr = 1
+	prefixLocalAnchors >
+	prefixLocalAnchors =
+	inlineStyle2TempFile = 0
+	# -> put Default CSS in external file = 1, place default css inline = 0
+	removeDefaultCss = 1
+	# -> Deactivate default (plugins etc) css in general = 1
+	#removePageCss = 1
+	# -> Deactivate css styled content css = 1
+
+	moveJsFromHeaderToFooter = 1
+	removeDefaultJS = 0
+	# 0 = inline, file = external
+
+	noPageTitle = 2
+
+
+	#defaultGetVars.L = 0
+	htmlTag_langKey = de
+	language = de
+	locale_all = de_DE.UTF-8
+	sys_language_uid = 0
+	uniqueLinkVars = 1
+	linkVars = L(0)
+
+	headerComment >
+	headerComment =
+
+	compressCss = 1
+	concatenateCss = 1
+
+	compressJs = 1
+	concatenateJs = 1
+
+	noScaleUp = 1
+	#admPanel = 1
+
+	cache = 1
+	no_cache = 0
+
+	sendCacheHeaders = 1
+	enableContentLengthHeader = 1
+
+	#option // global Cache settings, in this example cache expires after 30 days
+	cache_period = 2592000
+	debug = 1
+
+	htmlTag_setParams = xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" itemscope itemtype="http://schema.org/Thing" class="no-js" lang="de"
+
+
+	# Allow content included from anywhere in the page tree
+	content_from_pid_allowOutsideDomain = 1
+	# Mounting points from anywhere in pagetree
+	MP_mapRootPoints = root
+
+
+} #config END
+
+
+
+## Anti-Spam Protection EMail
+#------------------------------------------------
+config.spamProtectEmailAddresses = 2
+config.spamProtectEmailAddresses_atSubst = <script type="text/javascript">document.write('&#64;');</script>
+config.spamProtectEmailAddresses_lastDotSubst = .<span class="h">NxDEl#kui</span>
+# additional css class .h is needed in sytle.css !
+
+
+
+
+## Favicon / Apple Touch precomposed
+#------------------------------------------------
+page.headerData.50 = TEXT
+page.headerData.50.value (
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$protocol}{$baseURL}/fileadmin/template/assets/img/icon/ICONNAME-57.png?v=1" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$protocol}{$baseURL}/fileadmin/template/assets/img/icon/ICONNAME-72.png?v=1" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$protocol}{$baseURL}/fileadmin/template/assets/img/icon/ICONNAME-114.png?v1" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$protocol}{$baseURL}/fileadmin/template/assets/img/icon/ICONNAME-144.png?v=1" />
+    <link rel="shortcut icon" type="image/x-icon" href="{$protocol}{$baseURL}/fileadmin/template/assets/img/icon/favicon.ico">
+)
+
+#deactivated Icons
+page.headerData.50.value >
+page.headerData.50.value =
+
+
+
+## Remove "class="bodytext"
+#------------------------------------------------
+lib.parseFunc_RTE.nonTypoTagStdWrap.encapsLines {
+	addAttributes.P.class >
+}
+
+
+## RTE -> HTML-Tags korrekt in DB eintragen
+#------------------------------------------------
+tt_content.text.20.parseFunc.denyTags =
+tt_content.text.20.parseFunc.allowTags = *
+
+
+## RTE _> Use custom table class instead of class="contenttable"
+#------------------------------------------------
+lib.parseFunc_RTE.externalBlocks.table.stdWrap.HTMLparser.tags.table.fixAttrib.class.list >
+#lib.parseFunc_RTE.externalBlocks.table.stdWrap.HTMLparser.tags.table.fixAttrib.class.list = kunden
+
+#nochmaliges parsen von tabellenzellen ausschalten, damit inhalte nicht wieder in p gepackt werden
+lib.parseFunc_RTE.externalBlocks.table.HTMLtableCells.default.callRecursive = 0
+
+#nachträgliches ermöglichen von Links in Tabellenzellen
+lib.parseFunc_RTE.externalBlocks.table.HTMLtableCells.default.stdWrap.parseFunc {
+	makelinks = 1
+	makelinks.http.keep = scheme,path,query
+	makelinks.mailto.keep = path
+	tags {
+		link = TEXT
+		link {
+			current = 1
+			typolink.parameter.data = parameters : allParams
+		}
+	}
+}
+
+
+lib.parseFunc_RTE.externalBlocks.blockquote.callRecursive {
+	tagStdWrap.HTMLparser.tags.blockquote.overrideAttribs =
+}
+
+
+
+## CE textmedia
+#------------------------------------------------
+tt_content.textmedia.dataProcessing {
+	20.maxGalleryWidth = 1260
+	20.maxGalleryWidthInText = 1260
+	20.columnSpacing = 0
+	20.borderWidth = 0
+	20.borderPadding = 0
+}
+
+
+
+## Header Comment
+#------------------------------------------------
+page.config.headerComment >
+page.config.headerComment =
+
+
+
+## Open Graph
+#------------------------------------------------
+
+lib.opengraph = COA
+
+# Default
+lib.opengraph.10 = COA
+
+#lib.opengraph.10.10 = TEXT
+#lib.opengraph.10.10.value = <meta property="og:image" content="{$protocol}{$baseURL}/{$og.logo}" />
+
+lib.opengraph.10.20 = TEXT
+lib.opengraph.10.20.value = <meta property="og:locale" content="{$og.locale}" />
+
+lib.opengraph.10.30 = TEXT
+lib.opengraph.10.30.value = <meta property="og:type" content="{$og.type}" />
+
+lib.opengraph.10.31 = TEXT
+lib.opengraph.10.31.field = title
+lib.opengraph.10.31.noTrimWrap = |<meta property="og:title" content="| – {$og.titlesuffix}" />|
+
+lib.opengraph.10.32 = TEXT
+lib.opengraph.10.32.value = <meta property="og:site_name" content="{$og.titlesuffix}" />
+
+lib.opengraph.10.33 = TEXT
+lib.opengraph.10.33.field = description
+lib.opengraph.10.33.ifEmpty = {$og.description}
+lib.opengraph.10.33.wrap = <meta property="og:description" content="|" />
+
+lib.opengraph.10.34 = TEXT
+lib.opengraph.10.34 {
+	typolink {
+		parameter = {page:uid}
+		parameter.insertData = 1
+		useCacheHash = 1
+		# add all get parameters from the current URL
+		addQueryString = 1
+		addQueryString.method = GET
+		# remove the page id from the parameters so it is not inserted twice
+		addQueryString.exclude = id
+		returnLast = url
+	}
+	wrap = <meta property="og:url" content="{$protocol}{$baseURL}|" />
+}
+
+[globalVar = TSFE:id=1]
+	lib.opengraph.10.34 >
+	lib.opengraph.10.34 = TEXT
+	lib.opengraph.10.34.wrap = <meta property="og:url" content="{$protocol}{$baseURL}" />
+[global]
+
+
+
+lib.opengraph.10.35 = TEXT
+lib.opengraph.10.35 {
+	data = register : SYS_LASTCHANGED
+	wrap = <meta property="og:updated_time" content="|" />
+}
+
+
+page.headerData.20 < lib.opengraph
+
+
+## Twitter Card (Summary w large image)
+#------------------------------------------------
+
+lib.twittercard = COA
+
+# Default
+lib.twittercard.10 = COA
+
+#lib.twittercard.10.10 = TEXT
+#lib.twittercard.10.10.value = <meta name="twitter:image" content="{$protocol}{$baseURL}/{$tw.image}" />
+
+#lib.twittercard.10.20 = TEXT
+#lib.twittercard.10.20.value = <meta name="twitter:site" content="{$tw.site}" />
+
+lib.twittercard.10.30 = TEXT
+lib.twittercard.10.30.value = <meta name="twitter:card" content="summary_large_image" />
+
+lib.twittercard.10.31 = TEXT
+lib.twittercard.10.31.field = title
+lib.twittercard.10.31.noTrimWrap = |<meta name="twitter:title" content="| – {$tw.titlesuffix}" />|
+
+lib.twittercard.10.33 = TEXT
+lib.twittercard.10.33.field = description
+lib.twittercard.10.33.ifEmpty = {$tw.description}
+lib.twittercard.10.33.wrap = <meta name="twitter:description" content="|" />
+
+
+page.headerData.30 < lib.twittercard
+
+
+
+## Canonical
+#------------------------------------------------
+lib.canonical = TEXT
+lib.canonical {
+	typolink {
+		parameter = {page:uid}
+		parameter.insertData = 1
+		useCacheHash = 1
+		# add all get parameters from the current URL
+		addQueryString = 1
+		addQueryString.method = GET
+		# remove the page id from the parameters so it is not inserted twice
+		addQueryString.exclude = id
+		returnLast = url
+	}
+
+	wrap = <link rel="canonical" href="{$protocol}{$baseURL}|" />
+}
+page.headerData.1000 < lib.canonical
+
+
+## Canonical for start page
+#----------------------------
+[globalVar = TSFE:id=1]
+	lib.canonical >
+	lib.canonical = TEXT
+	lib.canonical.value = <link rel="canonical" href="{$protocol}{$baseURL}" />
+	page.headerData.1000 >
+	page.headerData.1000 < lib.canonical
+[global]
+
+
+## hreflang
+#----------------------------
+
+page.headerData.997 = TEXT
+page.headerData.997 {
+	typolink.parameter.data = page:alias // TSFE:id
+	typolink.returnLast = url
+	#typolink.additionalParams = &L=0
+	wrap = <link rel="alternate" hreflang="de" href="{$protocol}{$baseURL}|" />
+}
+
+
+## Google Optout, Analytics, Outbound
+#----------------------------
+
+page.headerData.1005 = TEXT
+page.headerData.1005.value (
+	<script type="text/javascript">
+		var gaProperty='UA-61229169-18';
+		var disableStr='ga-disable-'+gaProperty;
+		if(document.cookie.indexOf(disableStr+'=true')>-1){
+			window[disableStr]=true;
+		}
+		function gaOptout(){document.cookie=disableStr+'=true;expires=Thu, 31 Dec 2099 23:59:59 UTC;path=/';window[disableStr]=true;
+		}
+	</script>
+	<script type="text/javascript">
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-61229169-18','auto');ga('set','anonymizeIp',true);ga('send','pageview');setTimeout("ga('send','event','Seitenansichtsdauer','mindestens 30 Sekunden')",30000);
+	</script>
+	<script type="text/javascript">
+		var trackOutboundLink=function(url){ga('send','event','outbound','click',url,{'transport':'beacon','hitCallback':function(){document.location=url;}});}
+	</script>
+)
+
+## Disable Google Codes during development
+#----------------------------
+page.headerData.1005 >
+page.headerData.1005 =
+
+
+
+## Languages
+#------------------------------------------------
+
+#page.config.sys_language_mode = content_fallback
+# dont show anything instead of error if translation doesn't exist:
+##page.config.sys_language_mode = strict
+# if set to 1 unique contents per language are NOT allowed
+##page.config.sys_language_overlay = 0
+#page.config.sys_language_overlay = hideNonTranslated
+
+#additional info: don't show not translated pages in Menu -> Install Tool hidePagesIfNotTranslatedByDefault
+
+
+
+## EN, sys_language.uid = 1
+#----------------------------
+#[globalVar = GP:L=1]
+#    config {
+#        sys_language_uid = 1
+#        language = en
+#        locale_all = en_EN
+#        htmlTag_langKey = en
+#   }
+#[global]
+
+
+#	page.10.variables.langFilePath.value = fileadmin/template/lang/en
+# when second tree, then change definition folder for locallang file
+
+
+<INCLUDE_TYPOSCRIPT: source="FILE:fileadmin/template/typoscript/nav.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:fileadmin/template/typoscript/extensions.txt">
+<INCLUDE_TYPOSCRIPT: source="FILE:fileadmin/template/typoscript/inserts.txt">
+
+
+
+## FOR PRODUCTION ONLY -> Fluid Error messages
+#page.config.contentObjectExceptionHandler = 0
+
+
+
+
